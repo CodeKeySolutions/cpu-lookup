@@ -161,7 +161,7 @@ test("limited cache misses write a partial dataset", async () => {
   assert.equal(written.partial, true);
 });
 
-test("full reads replace partial snapshots", async () => {
+test("full reads use partial snapshots before collecting", async () => {
   let collected = false;
   const cache = new IntelCpuDataset({
     collector: {
@@ -174,13 +174,15 @@ test("full reads replace partial snapshots", async () => {
       ...dataset("2026-05-20T12:00:00.000Z"),
       partial: true
     }),
-    writeJson: async () => {}
+    writeJson: async () => {
+      throw new Error("A saved partial snapshot should not be replaced.");
+    }
   });
 
   const result = await cache.get();
 
-  assert.equal(collected, true);
-  assert.equal(result.cache, "refresh");
+  assert.equal(collected, false);
+  assert.equal(result.cache, "dataset");
 });
 
 test("incremental sync merges only new Intel products into the snapshot", async () => {

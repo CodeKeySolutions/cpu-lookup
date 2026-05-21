@@ -1,11 +1,8 @@
 import { mkdir, readFile, rename, writeFile } from "node:fs/promises";
 import { dirname } from "node:path";
-import { fileURLToPath } from "node:url";
 import { selectCpuDataset } from "./cpuDatasetFilters.js";
 
-export const DEFAULT_DATASET_PATH = fileURLToPath(
-  new URL("../data/cpus/intel.json", import.meta.url)
-);
+export const DEFAULT_DATASET_PATH = "./data/cpus/intel.json";
 
 export class IntelCpuDataset {
   constructor({
@@ -42,7 +39,7 @@ export class IntelCpuDataset {
     if (!refresh) {
       const cached = await this.read();
 
-      if (canServeCached(cached, cappedLimit)) {
+      if (hasProducts(cached)) {
         return markDatasetCache(
           selectCpuDataset(cached, { ...filters, limit: cappedLimit }),
           "dataset"
@@ -149,18 +146,6 @@ function stripCacheState(dataset) {
 
 function hasProducts(dataset) {
   return Boolean(dataset && Array.isArray(dataset.products));
-}
-
-function canServeCached(dataset, limit) {
-  if (!hasProducts(dataset)) {
-    return false;
-  }
-
-  if (!dataset.partial) {
-    return true;
-  }
-
-  return Boolean(limit && dataset.products.length >= limit);
 }
 
 function markPartial(dataset) {

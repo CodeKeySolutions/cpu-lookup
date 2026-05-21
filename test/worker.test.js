@@ -5,6 +5,13 @@ import {
   fetchCpuApi,
   syncIntelFromSchedule
 } from "../src/worker.js";
+import { DEFAULT_AMD_DATASET_PATH } from "../src/amdCpuDataset.js";
+import { DEFAULT_DATASET_PATH } from "../src/intelCpuDataset.js";
+
+test("dataset defaults remain Worker-safe path strings", () => {
+  assert.equal(DEFAULT_DATASET_PATH, "./data/cpus/intel.json");
+  assert.equal(DEFAULT_AMD_DATASET_PATH, "./data/cpus/amd.json");
+});
 
 test("Worker API returns filtered CPU datasets", async () => {
   let options;
@@ -36,6 +43,71 @@ test("Worker API returns filtered CPU datasets", async () => {
     speed: null,
     threads: null
   });
+});
+
+test("Worker API rejects direct calls when RapidAPI verification is enabled", async () => {
+  const response = await fetchCpuApi(
+    new Request("https://cpu.example/api/intel/cpus"),
+    {
+      intelDataset: {
+        async get() {
+          throw new Error("Unauthorized Worker calls should not reach the dataset.");
+        }
+      }
+    },
+    {
+      RAPIDAPI_PROXY_SECRET: "provider-secret"
+    }
+  );
+
+  assert.equal(response.status, 401);
+  assert.equal((await response.json()).error, "rapidapi_unauthorized");
+});
+
+test("Worker API rejects the wrong RapidAPI proxy secret", async () => {
+  const response = await fetchCpuApi(
+    new Request("https://cpu.example/api/intel/cpus", {
+      headers: {
+        "X-RapidAPI-Proxy-Secret": "wrong-secret"
+      }
+    }),
+    {
+      intelDataset: {
+        async get() {
+          throw new Error("Unauthorized Worker calls should not reach the dataset.");
+        }
+      }
+    },
+    {
+      RAPIDAPI_PROXY_SECRET: "provider-secret"
+    }
+  );
+
+  assert.equal(response.status, 401);
+  assert.equal((await response.json()).error, "rapidapi_unauthorized");
+});
+
+test("Worker API accepts RapidAPI proxy headers when verification is enabled", async () => {
+  const response = await fetchCpuApi(
+    new Request("https://cpu.example/api/amd/cpus?limit=1", {
+      headers: {
+        "X-RapidAPI-Proxy-Secret": "provider-secret"
+      }
+    }),
+    {
+      amdDataset: {
+        async get() {
+          return { count: 1, products: [] };
+        }
+      }
+    },
+    {
+      RAPIDAPI_PROXY_SECRET: "provider-secret"
+    }
+  );
+
+  assert.equal(response.status, 200);
+  assert.deepEqual(await response.json(), { count: 1, products: [] });
 });
 
 test("Worker services read cached Intel rows from R2", async () => {

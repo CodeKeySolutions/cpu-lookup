@@ -39,9 +39,9 @@ data/cpus/amd.json
 
 For a smaller development request, cap the number of products returned. If the
 saved dataset exists, the limited response comes from that snapshot. If it does
-not exist yet, a successful limited request writes a partial snapshot. Full
-requests still refresh partial snapshots so a small cached response is not
-treated as the complete dataset:
+not exist yet, a successful limited request writes a partial snapshot. All
+normal requests check the saved dataset first, including partial snapshots.
+Use `refresh=true` when you explicitly want to pull upstream:
 
 ```text
 GET http://localhost:3000/api/intel/cpus?limit=10
@@ -97,6 +97,29 @@ request per CPU. Requests are spaced by `AMD_REQUEST_INTERVAL_MS` and retry
 rate-limit/server-busy responses up to `AMD_MAX_RETRIES` times. The AMD endpoint
 returns `502 amd_source_unavailable` if the upstream refresh fails; a saved AMD
 dataset remains available to normal requests.
+
+## RapidAPI
+
+Set `RAPIDAPI_PROXY_SECRET` to require CPU API calls to come through RapidAPI:
+
+```env
+RAPIDAPI_PROXY_SECRET=your-provider-proxy-secret
+```
+
+When it is configured, `/api/intel/cpus` and `/api/amd/cpus` require
+RapidAPI's `X-RapidAPI-Proxy-Secret` header to match that configured secret.
+`/health` stays public. Leave the secret unset for local direct calls.
+
+For Cloudflare, keep the provider proxy secret out of `wrangler.jsonc`:
+
+```powershell
+npx wrangler secret put RAPIDAPI_PROXY_SECRET
+```
+
+RapidAPI publishing docs are in:
+
+- `docs/rapidapi.openapi.yaml` for OpenAPI import
+- `docs/rapidapi.md` for listing and endpoint copy
 
 ## Cloudflare
 

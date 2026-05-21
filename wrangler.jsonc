@@ -9,7 +9,8 @@
 	"vars": {
 		"AMD_REQUEST_INTERVAL_MS": "1000",
 		"AMD_MAX_RETRIES": "2",
-		"INTEL_SYNC_LIMIT": "4"
+		"INTEL_SYNC_LIMIT": "4",
+		"RAPIDAPI_PROXY_SECRET": "67e22940-5522-11f1-a7bd-019d2b7d43ab"
 	},
 	"triggers": {
 		"crons": [

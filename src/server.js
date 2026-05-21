@@ -5,6 +5,7 @@ import { AmdCpuDataset } from "./amdCpuDataset.js";
 import { IntelArkCollector, IntelSourceError } from "./intelArkCollector.js";
 import { IntelCpuDataset } from "./intelCpuDataset.js";
 import { startIntelCpuSync } from "./intelCpuSync.js";
+import { checkRapidApiRequest } from "./rapidApiAuth.js";
 
 const intelCollector = new IntelArkCollector();
 const intelDataset = new IntelCpuDataset({ collector: intelCollector });
@@ -27,6 +28,18 @@ export function createServer(
     }
 
     if (request.method === "GET" && url.pathname === "/api/intel/cpus") {
+      const rapidApiAuth = checkRapidApiRequest(
+        request.headers,
+        process.env.RAPIDAPI_PROXY_SECRET
+      );
+
+      if (!rapidApiAuth.ok) {
+        return json(response, 401, {
+          error: "rapidapi_unauthorized",
+          message: rapidApiAuth.message
+        });
+      }
+
       try {
         const result = await intelCpuDataset.get({
           chipset: url.searchParams.get("chipset"),
@@ -53,6 +66,18 @@ export function createServer(
     }
 
     if (request.method === "GET" && url.pathname === "/api/amd/cpus") {
+      const rapidApiAuth = checkRapidApiRequest(
+        request.headers,
+        process.env.RAPIDAPI_PROXY_SECRET
+      );
+
+      if (!rapidApiAuth.ok) {
+        return json(response, 401, {
+          error: "rapidapi_unauthorized",
+          message: rapidApiAuth.message
+        });
+      }
+
       try {
         const result = await amdCpuDataset.get({
           chipset: url.searchParams.get("chipset"),

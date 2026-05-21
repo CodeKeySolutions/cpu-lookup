@@ -3,6 +3,7 @@ import { AmdCpuDataset } from "./amdCpuDataset.js";
 import { IntelArkCollector, IntelSourceError } from "./intelArkCollector.js";
 import { IntelCpuDataset } from "./intelCpuDataset.js";
 import { createR2JsonStore } from "./r2JsonStore.js";
+import { checkRapidApiRequest } from "./rapidApiAuth.js";
 
 const INTEL_DATASET_KEY = "cpus/intel.json";
 const AMD_DATASET_KEY = "cpus/amd.json";
@@ -31,7 +32,7 @@ export function createWorkerServices(env) {
   };
 }
 
-export async function fetchCpuApi(request, services) {
+export async function fetchCpuApi(request, services, env = {}) {
   const url = new URL(request.url);
 
   if (request.method === "GET" && url.pathname === "/health") {
@@ -39,10 +40,22 @@ export async function fetchCpuApi(request, services) {
   }
 
   if (request.method === "GET" && url.pathname === "/api/intel/cpus") {
+    const auth = rapidApiResponse(request, env);
+
+    if (auth) {
+      return auth;
+    }
+
     return datasetResponse(services.intelDataset, url, IntelSourceError, "intel");
   }
 
   if (request.method === "GET" && url.pathname === "/api/amd/cpus") {
+    const auth = rapidApiResponse(request, env);
+
+    if (auth) {
+      return auth;
+    }
+
     return datasetResponse(services.amdDataset, url, AmdSourceError, "amd");
   }
 
@@ -52,6 +65,22 @@ export async function fetchCpuApi(request, services) {
       message: "Use GET /api/intel/cpus or GET /api/amd/cpus for CPU specs."
     },
     404
+  );
+}
+
+function rapidApiResponse(request, env) {
+  const auth = checkRapidApiRequest(request.headers, env.RAPIDAPI_PROXY_SECRET);
+
+  if (auth.ok) {
+    return null;
+  }
+
+  return json(
+    {
+      error: "rapidapi_unauthorized",
+      message: auth.message
+    },
+    401
   );
 }
 
@@ -108,7 +137,7 @@ function envNumber(value) {
 
 export default {
   async fetch(request, env) {
-    return fetchCpuApi(request, createWorkerServices(env));
+    return fetchCpuApi(request, createWorkerServices(env), env);
   },
 
   async scheduled(_event, env, ctx) {

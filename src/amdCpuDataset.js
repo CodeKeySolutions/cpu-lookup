@@ -1,11 +1,8 @@
 import { mkdir, readFile, rename, writeFile } from "node:fs/promises";
 import { dirname } from "node:path";
-import { fileURLToPath } from "node:url";
 import { selectCpuDataset } from "./cpuDatasetFilters.js";
 
-export const DEFAULT_AMD_DATASET_PATH = fileURLToPath(
-  new URL("../data/cpus/amd.json", import.meta.url)
-);
+export const DEFAULT_AMD_DATASET_PATH = "./data/cpus/amd.json";
 
 export class AmdCpuDataset {
   constructor({
@@ -42,7 +39,7 @@ export class AmdCpuDataset {
     if (!refresh) {
       const cached = await this.read();
 
-      if (canServeCached(cached, cappedLimit)) {
+      if (hasProducts(cached)) {
         return withCache(
           selectCpuDataset(cached, { ...filters, limit: cappedLimit }),
           "dataset"
@@ -109,18 +106,6 @@ function stripCache(dataset) {
 
 function hasProducts(dataset) {
   return Boolean(dataset && Array.isArray(dataset.products));
-}
-
-function canServeCached(dataset, limit) {
-  if (!hasProducts(dataset)) {
-    return false;
-  }
-
-  if (!dataset.partial) {
-    return true;
-  }
-
-  return Boolean(limit && dataset.products.length >= limit);
 }
 
 function markPartial(dataset) {

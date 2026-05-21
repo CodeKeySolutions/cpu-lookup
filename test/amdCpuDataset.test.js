@@ -71,7 +71,7 @@ test("AMD full cache misses write a dataset snapshot", async () => {
   assert.equal(written.cache, undefined);
 });
 
-test("AMD full reads replace partial snapshots", async () => {
+test("AMD full reads use partial snapshots before collecting", async () => {
   let collected = false;
   const cache = new AmdCpuDataset({
     collector: {
@@ -86,13 +86,15 @@ test("AMD full reads replace partial snapshots", async () => {
       partial: true,
       products: dataset().products.slice(0, 1)
     }),
-    writeJson: async () => {}
+    writeJson: async () => {
+      throw new Error("A saved AMD partial snapshot should not be replaced.");
+    }
   });
 
   const result = await cache.get();
 
-  assert.equal(collected, true);
-  assert.equal(result.cache, "refresh");
+  assert.equal(collected, false);
+  assert.equal(result.cache, "dataset");
 });
 
 function dataset() {

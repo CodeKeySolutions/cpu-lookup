@@ -1,0 +1,224 @@
+openapi: 3.0.3
+info:
+  title: CPU Specs API
+  version: 1.0.0
+  description: >
+    Cached Intel and AMD CPU specification datasets with filters for sockets,
+    chipset-related fields, server classification, ECC support, RAM support,
+    core counts, threads, and processor speed.
+servers:
+  - url: https://your-rapidapi-host.p.rapidapi.com
+    description: Replace with the RapidAPI host shown for this API.
+security:
+  - RapidApiKey: []
+paths:
+  /api/intel/cpus:
+    get:
+      operationId: getIntelCpus
+      summary: Get Intel CPUs
+      description: Returns cached Intel CPU models and grouped specification sections.
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/Socket"
+        - $ref: "#/components/parameters/Chipset"
+        - $ref: "#/components/parameters/Server"
+        - $ref: "#/components/parameters/Ecc"
+        - $ref: "#/components/parameters/Ram"
+        - $ref: "#/components/parameters/Cores"
+        - $ref: "#/components/parameters/Threads"
+        - $ref: "#/components/parameters/Speed"
+      responses:
+        "200":
+          description: Intel CPU dataset response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CpuDataset"
+        "401":
+          $ref: "#/components/responses/RapidApiUnauthorized"
+        "502":
+          description: Intel source unavailable during an upstream refresh.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /api/amd/cpus:
+    get:
+      operationId: getAmdCpus
+      summary: Get AMD CPUs
+      description: Returns cached AMD CPU models and grouped specification fields.
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/Socket"
+        - $ref: "#/components/parameters/Chipset"
+        - $ref: "#/components/parameters/Server"
+        - $ref: "#/components/parameters/Ecc"
+        - $ref: "#/components/parameters/Ram"
+        - $ref: "#/components/parameters/Cores"
+        - $ref: "#/components/parameters/Threads"
+        - $ref: "#/components/parameters/Speed"
+      responses:
+        "200":
+          description: AMD CPU dataset response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CpuDataset"
+        "401":
+          $ref: "#/components/responses/RapidApiUnauthorized"
+        "502":
+          description: AMD source unavailable during an upstream refresh.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+components:
+  securitySchemes:
+    RapidApiKey:
+      type: apiKey
+      in: header
+      name: X-RapidAPI-Key
+  parameters:
+    Limit:
+      name: limit
+      in: query
+      description: Positive number of matching CPU products to return.
+      schema:
+        type: integer
+        minimum: 1
+      example: 10
+    Socket:
+      name: socket
+      in: query
+      description: Match socket-related specification fields.
+      schema:
+        type: string
+      example: AM5
+    Chipset:
+      name: chipset
+      in: query
+      description: Match chipset-related specification fields.
+      schema:
+        type: string
+      example: X870
+    Server:
+      name: server
+      in: query
+      description: Filter server CPUs or non-server CPUs.
+      schema:
+        type: boolean
+      example: true
+    Ecc:
+      name: ecc
+      in: query
+      description: Filter by ECC support.
+      schema:
+        type: boolean
+      example: true
+    Ram:
+      name: ram
+      in: query
+      description: Match exposed memory type or RAM support fields.
+      schema:
+        type: string
+      example: DDR5
+    Cores:
+      name: cores
+      in: query
+      description: Exact-match exposed CPU core count fields.
+      schema:
+        type: number
+      example: 16
+    Threads:
+      name: threads
+      in: query
+      description: Exact-match exposed thread count fields.
+      schema:
+        type: number
+      example: 32
+    Speed:
+      name: speed
+      in: query
+      description: >
+        Exact-match exposed processor frequency or clock fields. Plain numeric
+        values are treated as GHz.
+      schema:
+        type: string
+      example: "5.7"
+  responses:
+    RapidApiUnauthorized:
+      description: Request did not pass RapidAPI verification.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+  schemas:
+    CpuDataset:
+      type: object
+      required:
+        - count
+        - products
+      properties:
+        source:
+          type: string
+          description: Vendor source name for the dataset.
+        sourceUrl:
+          type: string
+          format: uri
+        collectedAt:
+          type: string
+          format: date-time
+        lastCheckedAt:
+          type: string
+          format: date-time
+        count:
+          type: integer
+          minimum: 0
+        discoveredCount:
+          type: integer
+          minimum: 0
+        partial:
+          type: boolean
+        cache:
+          type: string
+          enum:
+            - dataset
+            - partial
+            - refresh
+            - sync
+        products:
+          type: array
+          items:
+            $ref: "#/components/schemas/CpuProduct"
+    CpuProduct:
+      type: object
+      required:
+        - name
+        - specs
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        family:
+          type: string
+        url:
+          type: string
+          format: uri
+        specs:
+          type: object
+          description: Vendor-defined specification sections and string field values.
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: string
+    ErrorResponse:
+      type: object
+      required:
+        - error
+        - message
+      properties:
+        error:
+          type: string
+        message:
+          type: string
