@@ -17,7 +17,7 @@ test("Worker API returns filtered CPU datasets", async () => {
   let options;
   const response = await fetchCpuApi(
     new Request(
-      "https://cpu.example/api/intel/cpus?limit=1&cores=8&ram=DDR5&server=false"
+      "https://cpu.example/api/intel/cpus?limit=1&columns=id,name&cores=8&ram=DDR5&server=false"
     ),
     {
       intelDataset: {
@@ -30,9 +30,10 @@ test("Worker API returns filtered CPU datasets", async () => {
   );
 
   assert.equal(response.status, 200);
-  assert.deepEqual(await response.json(), { count: 1, products: [] });
+  assert.deepEqual(await response.json(), []);
   assert.deepEqual(options, {
     chipset: null,
+    columns: "id,name",
     cores: "8",
     ecc: null,
     ram: "DDR5",
@@ -97,7 +98,7 @@ test("Worker API accepts RapidAPI proxy headers when verification is enabled", a
     {
       amdDataset: {
         async get() {
-          return { count: 1, products: [] };
+          return { count: 1, products: [{ id: "amd-1" }] };
         }
       }
     },
@@ -107,7 +108,7 @@ test("Worker API accepts RapidAPI proxy headers when verification is enabled", a
   );
 
   assert.equal(response.status, 200);
-  assert.deepEqual(await response.json(), { count: 1, products: [] });
+  assert.deepEqual(await response.json(), [{ id: "amd-1" }]);
 });
 
 test("Worker services read cached Intel rows from R2", async () => {

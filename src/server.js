@@ -43,6 +43,7 @@ export function createServer(
       try {
         const result = await intelCpuDataset.get({
           chipset: url.searchParams.get("chipset"),
+          columns: url.searchParams.get("columns"),
           cores: url.searchParams.get("cores"),
           ecc: url.searchParams.get("ecc"),
           ram: url.searchParams.get("ram"),
@@ -54,7 +55,7 @@ export function createServer(
           threads: url.searchParams.get("threads")
         });
 
-        return json(response, 200, result);
+        return json(response, 200, result.products);
       } catch (error) {
         const status = error instanceof IntelSourceError ? 502 : 500;
 
@@ -81,6 +82,7 @@ export function createServer(
       try {
         const result = await amdCpuDataset.get({
           chipset: url.searchParams.get("chipset"),
+          columns: url.searchParams.get("columns"),
           cores: url.searchParams.get("cores"),
           ecc: url.searchParams.get("ecc"),
           ram: url.searchParams.get("ram"),
@@ -92,7 +94,7 @@ export function createServer(
           threads: url.searchParams.get("threads")
         });
 
-        return json(response, 200, result);
+        return json(response, 200, result.products);
       } catch (error) {
         const status = error instanceof AmdSourceError ? 502 : 500;
 

@@ -29,8 +29,9 @@ GET http://localhost:3000/api/amd/cpus
 The Intel response includes discovered SKUs and grouped Intel ARK spec sections.
 The AMD response maps the official AMD processor specification table columns
 into spec rows for desktop, laptop, workstation, server, and embedded CPU
-tables. Once a full dataset has been collected, normal requests read the saved
-snapshots instead of fetching upstream pages again:
+tables. API responses contain only selected CPU product rows from the dataset.
+Once a full dataset has been collected, normal requests read the saved snapshots
+instead of fetching upstream pages again:
 
 ```text
 data/cpus/intel.json
@@ -60,6 +61,7 @@ GET http://localhost:3000/api/intel/cpus?server=true&ecc=true
 GET http://localhost:3000/api/amd/cpus?server=false&ram=DDR5
 GET http://localhost:3000/api/intel/cpus?cores=8&threads=8
 GET http://localhost:3000/api/amd/cpus?cores=16&threads=32&speed=5.7
+GET http://localhost:3000/api/amd/cpus?columns=id,name,family&socket=AM5
 ```
 
 `server` and `ecc` accept `true` or `false`. Socket and chipset filters match
@@ -67,6 +69,9 @@ specification field names containing `socket` or `chipset`. The RAM filter
 matches memory type/system memory fields such as `DDR4` or `DDR5`. Core and
 thread filters exact-match numeric spec values. `speed` exact-matches CPU
 frequency/clock fields in GHz; both `speed=2.8` and `speed=2.8GHz` work.
+Use `columns` with comma-separated product fields such as
+`id,name,family,url,specs` to trim each returned CPU row. Filtering still uses
+the full saved row before column selection is applied.
 Available results depend on which fields the vendor source exposes for each CPU
 row.
 

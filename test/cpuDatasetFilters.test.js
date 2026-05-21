@@ -83,6 +83,31 @@ test("CPU dataset filtering matches processor speed fields", () => {
   assert.deepEqual(selected.products.map((product) => product.id), ["intel-bga"]);
 });
 
+test("CPU dataset selection projects comma-separated product columns after filtering", () => {
+  const selected = selectCpuDataset(dataset(), {
+    columns: "id, name, specs",
+    socket: "AM5"
+  });
+
+  assert.deepEqual(selected.products, [
+    {
+      id: "amd-am5",
+      name: "AMD AM5 CPU",
+      specs: {
+        Specifications: {
+          "CPU Socket": "AM5",
+          "Chipset Support": "Gen 5",
+          "Memory Types": "DDR5",
+          "ECC Supported": "Yes",
+          "# of CPU Cores": "16",
+          "# of Threads": "32",
+          "Max. Boost Clock": "Up to 5.7 GHz"
+        }
+      }
+    }
+  ]);
+});
+
 function dataset() {
   return {
     count: 4,
@@ -127,6 +152,8 @@ function dataset() {
       },
       {
         id: "amd-am5",
+        name: "AMD AM5 CPU",
+        url: "https://amd.example/am5",
         specs: {
           Specifications: {
             "CPU Socket": "AM5",

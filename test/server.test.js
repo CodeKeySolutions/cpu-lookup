@@ -22,7 +22,7 @@ before(async () => {
         return {
           source: "Intel Product Specifications (ARK)",
           count: Number(limit) || 2,
-          products: []
+          products: [{ id: "intel-1" }]
         };
       }
     },
@@ -32,7 +32,7 @@ before(async () => {
         return {
           source: "AMD Processor Specifications",
           count: Number(options.limit) || 3,
-          products: []
+          products: [{ id: "amd-1" }]
         };
       }
     }
@@ -66,7 +66,7 @@ test("GET /api/intel/cpus passes collection options", async () => {
   const body = await response.json();
 
   assert.equal(response.status, 200);
-  assert.equal(body.count, 1);
+  assert.deepEqual(body, [{ id: "intel-1" }]);
 });
 
 test("GET /api/intel/cpus reports Intel source failures", async () => {
@@ -121,7 +121,7 @@ test("GET /api/intel/cpus accepts RapidAPI proxy headers when verification is en
     const body = await response.json();
 
     assert.equal(response.status, 200);
-    assert.equal(body.count, 1);
+    assert.deepEqual(body, [{ id: "intel-1" }]);
   } finally {
     delete process.env.RAPIDAPI_PROXY_SECRET;
   }
@@ -129,14 +129,15 @@ test("GET /api/intel/cpus accepts RapidAPI proxy headers when verification is en
 
 test("GET /api/amd/cpus passes collection options", async () => {
   const response = await fetch(
-    `${baseUrl}/api/amd/cpus?limit=1&socket=AM5&chipset=X870&server=false&ecc=true&ram=DDR5&cores=16&threads=32&speed=5.7`
+    `${baseUrl}/api/amd/cpus?limit=1&socket=AM5&chipset=X870&columns=id,name&server=false&ecc=true&ram=DDR5&cores=16&threads=32&speed=5.7`
   );
   const body = await response.json();
 
   assert.equal(response.status, 200);
-  assert.equal(body.count, 1);
+  assert.deepEqual(body, [{ id: "amd-1" }]);
   assert.deepEqual(amdOptions, {
     chipset: "X870",
+    columns: "id,name",
     cores: "16",
     ecc: "true",
     ram: "DDR5",

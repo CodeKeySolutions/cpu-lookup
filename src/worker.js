@@ -92,7 +92,8 @@ export async function syncIntelFromSchedule(env, services = createWorkerServices
 
 async function datasetResponse(dataset, url, SourceError, source) {
   try {
-    return json(await dataset.get(datasetOptions(url)));
+    const result = await dataset.get(datasetOptions(url));
+    return json(result.products);
   } catch (error) {
     const sourceFailure = error instanceof SourceError;
 
@@ -109,6 +110,7 @@ async function datasetResponse(dataset, url, SourceError, source) {
 function datasetOptions(url) {
   return {
     chipset: url.searchParams.get("chipset"),
+    columns: url.searchParams.get("columns"),
     cores: url.searchParams.get("cores"),
     ecc: url.searchParams.get("ecc"),
     ram: url.searchParams.get("ram"),

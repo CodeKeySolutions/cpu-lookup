@@ -5,8 +5,8 @@ OpenAPI definition is in `docs/rapidapi.openapi.yaml`.
 
 ## Overview
 
-CPU Specs API returns cached Intel and AMD CPU specification datasets collected
-from vendor specification pages. Each CPU result keeps the vendor's grouped
+CPU Specs API returns Intel and AMD CPU products from cached specification
+datasets collected from vendor specification pages. Each CPU result keeps the vendor's grouped
 specification fields so clients can inspect sockets, memory support, ECC
 support, core counts, clocks, and other exposed details.
 
@@ -59,6 +59,7 @@ Both CPU endpoints accept the same public query parameters.
 | `cores` | number | Exact-match exposed CPU core count fields. | `16` |
 | `threads` | number | Exact-match exposed thread count fields. | `32` |
 | `speed` | string | Exact-match exposed processor frequency or clock fields. | `5.7` |
+| `columns` | string | Return only comma-separated product fields such as `id`, `name`, `family`, `url`, or `specs`. | `id,name,family` |
 
 `speed` treats plain numeric values as GHz. Values such as `5.7GHz` and
 `5700MHz` are also accepted by the filter logic.
@@ -81,6 +82,12 @@ Get AMD AM5 CPUs with DDR5 support:
 GET /api/amd/cpus?socket=AM5&ram=DDR5
 ```
 
+Get compact AMD rows with only model identity fields:
+
+```text
+GET /api/amd/cpus?columns=id,name,family&socket=AM5
+```
+
 Get Intel server CPUs with ECC support:
 
 ```text
@@ -96,34 +103,25 @@ GET /api/amd/cpus?cores=16&threads=32&speed=5.7
 ## Success Response
 
 ```json
-{
-  "source": "Intel Product Specifications (ARK)",
-  "sourceUrl": "https://www.intel.com/content/www/us/en/ark.html",
-  "collectedAt": "2026-05-21T12:32:28.134Z",
-  "count": 1,
-  "discoveredCount": 2265,
-  "partial": true,
-  "cache": "dataset",
-  "products": [
-    {
-      "id": "246037",
-      "name": "Intel Atom Processor P6922-3",
-      "family": "Intel Atom Processor P Series",
-      "url": "https://www.intel.com/content/www/us/en/products/sku/246037/specifications.html",
-      "specs": {
-        "CPU Specifications": {
-          "Total Cores": "8",
-          "Total Threads": "8",
-          "Processor Base Frequency": "2.2 GHz"
-        },
-        "Memory Specifications": {
-          "Memory Types": "DDR5",
-          "ECC Memory Supported": "Yes"
-        }
+[
+  {
+    "id": "246037",
+    "name": "Intel Atom Processor P6922-3",
+    "family": "Intel Atom Processor P Series",
+    "url": "https://www.intel.com/content/www/us/en/products/sku/246037/specifications.html",
+    "specs": {
+      "CPU Specifications": {
+        "Total Cores": "8",
+        "Total Threads": "8",
+        "Processor Base Frequency": "2.2 GHz"
+      },
+      "Memory Specifications": {
+        "Memory Types": "DDR5",
+        "ECC Memory Supported": "Yes"
       }
     }
-  ]
-}
+  }
+]
 ```
 
 The `specs` object uses vendor-defined section names and field names, so fields

@@ -27,13 +27,14 @@ paths:
         - $ref: "#/components/parameters/Cores"
         - $ref: "#/components/parameters/Threads"
         - $ref: "#/components/parameters/Speed"
+        - $ref: "#/components/parameters/Columns"
       responses:
         "200":
-          description: Intel CPU dataset response.
+          description: Intel CPU product rows from the dataset.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/CpuDataset"
+                $ref: "#/components/schemas/CpuProducts"
         "401":
           $ref: "#/components/responses/RapidApiUnauthorized"
         "502":
@@ -57,13 +58,14 @@ paths:
         - $ref: "#/components/parameters/Cores"
         - $ref: "#/components/parameters/Threads"
         - $ref: "#/components/parameters/Speed"
+        - $ref: "#/components/parameters/Columns"
       responses:
         "200":
-          description: AMD CPU dataset response.
+          description: AMD CPU product rows from the dataset.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/CpuDataset"
+                $ref: "#/components/schemas/CpuProducts"
         "401":
           $ref: "#/components/responses/RapidApiUnauthorized"
         "502":
@@ -145,6 +147,16 @@ components:
       schema:
         type: string
       example: "5.7"
+    Columns:
+      name: columns
+      in: query
+      description: >
+        Comma-separated product fields to return per CPU row. Common fields
+        are id, name, family, url, and specs. Filters run before this response
+        projection is applied.
+      schema:
+        type: string
+      example: id,name,family
   responses:
     RapidApiUnauthorized:
       description: Request did not pass RapidAPI verification.
@@ -153,43 +165,11 @@ components:
           schema:
             $ref: "#/components/schemas/ErrorResponse"
   schemas:
-    CpuDataset:
-      type: object
-      required:
-        - count
-        - products
-      properties:
-        source:
-          type: string
-          description: Vendor source name for the dataset.
-        sourceUrl:
-          type: string
-          format: uri
-        collectedAt:
-          type: string
-          format: date-time
-        lastCheckedAt:
-          type: string
-          format: date-time
-        count:
-          type: integer
-          minimum: 0
-        discoveredCount:
-          type: integer
-          minimum: 0
-        partial:
-          type: boolean
-        cache:
-          type: string
-          enum:
-            - dataset
-            - partial
-            - refresh
-            - sync
-        products:
-          type: array
-          items:
-            $ref: "#/components/schemas/CpuProduct"
+    CpuProducts:
+      type: array
+      description: Selected CPU product rows from the saved dataset.
+      items:
+        $ref: "#/components/schemas/CpuProduct"
     CpuProduct:
       type: object
       required:

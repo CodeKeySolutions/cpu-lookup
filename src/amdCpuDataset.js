@@ -23,6 +23,7 @@ export class AmdCpuDataset {
 
   async get({
     chipset,
+    columns,
     cores,
     ecc,
     ram,
@@ -34,7 +35,17 @@ export class AmdCpuDataset {
     threads
   } = {}) {
     const cappedLimit = normalizeLimit(limit);
-    const filters = { chipset, cores, ecc, ram, server, socket, speed, threads };
+    const filters = {
+      chipset,
+      columns,
+      cores,
+      ecc,
+      ram,
+      server,
+      socket,
+      speed,
+      threads
+    };
 
     if (!refresh) {
       const cached = await this.read();

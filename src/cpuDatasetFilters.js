@@ -1,6 +1,17 @@
 export function selectCpuDataset(
   dataset,
-  { chipset, cores, ecc, limit, ram, server, socket, speed, threads } = {}
+  {
+    chipset,
+    columns,
+    cores,
+    ecc,
+    limit,
+    ram,
+    server,
+    socket,
+    speed,
+    threads
+  } = {}
 ) {
   const products = filterProducts(dataset.products ?? [], {
     chipset,
@@ -18,7 +29,7 @@ export function selectCpuDataset(
   return {
     ...dataset,
     count: selectedProducts.length,
-    products: selectedProducts
+    products: projectProductColumns(selectedProducts, columns)
   };
 }
 
@@ -237,4 +248,31 @@ function normalizeLimit(limit) {
 
   const number = Number.parseInt(limit, 10);
   return Number.isInteger(number) && number > 0 ? number : undefined;
+}
+
+function projectProductColumns(products, columns) {
+  const selectedColumns = normalizeColumns(columns);
+
+  if (!selectedColumns) {
+    return products;
+  }
+
+  return products.map((product) => {
+    return Object.fromEntries(
+      Object.entries(product).filter(([column]) => selectedColumns.has(normalize(column)))
+    );
+  });
+}
+
+function normalizeColumns(columns) {
+  if (!columns) {
+    return null;
+  }
+
+  const selectedColumns = String(columns)
+    .split(",")
+    .map(normalize)
+    .filter(Boolean);
+
+  return selectedColumns.length ? new Set(selectedColumns) : null;
 }
