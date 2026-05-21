@@ -1,0 +1,17 @@
+{
+  "name": "intel-cpu-api",
+  "version": "1.0.0",
+  "description": "API endpoints that collect Intel and AMD CPU models and specs from official specification pages.",
+  "type": "module",
+  "scripts": {
+    "dev": "node --env-file-if-exists=.env --watch src/server.js",
+    "start": "node --env-file-if-exists=.env src/server.js",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "cheerio": "^1.1.2"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
