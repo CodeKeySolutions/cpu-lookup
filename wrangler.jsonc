@@ -1,0 +1,25 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "cpu-specs-api",
+	"main": "src/worker.js",
+	"compatibility_date": "2026-05-21",
+	"compatibility_flags": [
+		"nodejs_compat"
+	],
+	"vars": {
+		"AMD_REQUEST_INTERVAL_MS": "1000",
+		"AMD_MAX_RETRIES": "2",
+		"INTEL_SYNC_LIMIT": "4"
+	},
+	"triggers": {
+		"crons": [
+			"*/5 * * * *"
+		]
+	},
+	"r2_buckets": [
+		{
+			"binding": "CPU_DATA",
+			"bucket_name": "cpu-specs-data"
+		}
+	]
+}

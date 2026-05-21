@@ -13,6 +13,12 @@ npm start
 `npm start` and `npm run dev` load `.env` when it exists. Set `PORT` there
 to change the local server port.
 
+For the Cloudflare Worker runtime, use:
+
+```powershell
+npm run dev:worker
+```
+
 Then call:
 
 ```text
@@ -91,3 +97,35 @@ request per CPU. Requests are spaced by `AMD_REQUEST_INTERVAL_MS` and retry
 rate-limit/server-busy responses up to `AMD_MAX_RETRIES` times. The AMD endpoint
 returns `502 amd_source_unavailable` if the upstream refresh fails; a saved AMD
 dataset remains available to normal requests.
+
+## Cloudflare
+
+The Cloudflare deployment uses:
+
+- `src/worker.js` for Worker `fetch` and cron `scheduled` handlers
+- `wrangler.jsonc` for Wrangler config
+- an R2 binding named `CPU_DATA`
+- R2 objects `cpus/intel.json` and `cpus/amd.json`
+
+The Worker cron runs every five minutes and uses `INTEL_SYNC_LIMIT=4` to merge
+small Intel batches into the R2 Intel snapshot. Local Node deployment continues
+to use `data/cpus/*.json`.
+
+Create the configured R2 bucket once:
+
+```powershell
+npx wrangler r2 bucket create cpu-specs-data
+```
+
+Upload existing snapshots when you want to seed production:
+
+```powershell
+npx wrangler r2 object put cpu-specs-data/cpus/intel.json --file=data/cpus/intel.json
+npx wrangler r2 object put cpu-specs-data/cpus/amd.json --file=data/cpus/amd.json
+```
+
+Then deploy:
+
+```powershell
+npm run deploy
+```

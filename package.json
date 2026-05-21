@@ -5,13 +5,18 @@
   "type": "module",
   "scripts": {
     "dev": "node --env-file-if-exists=.env --watch src/server.js",
+    "dev:worker": "wrangler dev",
     "start": "node --env-file-if-exists=.env src/server.js",
-    "test": "node --test"
+    "test": "node --test",
+    "deploy": "wrangler deploy"
   },
   "dependencies": {
     "cheerio": "^1.1.2"
   },
   "engines": {
     "node": ">=20"
+  },
+  "devDependencies": {
+    "wrangler": "^4.93.1"
   }
 }
