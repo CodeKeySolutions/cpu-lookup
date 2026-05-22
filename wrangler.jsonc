@@ -9,7 +9,8 @@
 	"vars": {
 		"AMD_REQUEST_INTERVAL_MS": "1000",
 		"AMD_MAX_RETRIES": "2",
-		"INTEL_SYNC_LIMIT": "4"
+		"INTEL_SYNC_LIMIT": "4",
+		"NODE_ENV": "production",
 	},
 	"triggers": {
 		"crons": [

@@ -15,7 +15,7 @@ const amdCollector = new AmdCpuCollector({
 });
 const amdDataset = new AmdCpuDataset({ collector: amdCollector });
 const port = Number.parseInt(process.env.PORT ?? "3000", 10);
-
+const DEVELOPMENT_MODE = process.env.NODE_ENV !== "production";
 export function createServer(
   intelCpuDataset = intelDataset,
   amdCpuDataset = amdDataset

@@ -258,10 +258,43 @@ function projectProductColumns(products, columns) {
   }
 
   return products.map((product) => {
-    return Object.fromEntries(
-      Object.entries(product).filter(([column]) => selectedColumns.has(normalize(column)))
+    const projectedProduct = Object.fromEntries(
+      Object.entries(product).filter(([column]) => {
+        return column !== "specs" && selectedColumns.has(normalize(column));
+      })
     );
+
+    const specs = projectSpecs(product.specs, selectedColumns);
+
+    if (specs) {
+      projectedProduct.specs = specs;
+    }
+
+    return projectedProduct;
   });
+}
+
+function projectSpecs(specs, selectedColumns) {
+  if (selectedColumns.has("specs")) {
+    return specs;
+  }
+
+  const projectedSpecs = Object.fromEntries(
+    Object.entries(specs ?? {})
+      .map(([sectionName, section]) => {
+        return [
+          sectionName,
+          Object.fromEntries(
+            Object.entries(section ?? {}).filter(([column, value]) => {
+              return typeof value === "string" && selectedColumns.has(normalize(column));
+            })
+          )
+        ];
+      })
+      .filter(([, section]) => Object.keys(section).length)
+  );
+
+  return Object.keys(projectedSpecs).length ? projectedSpecs : null;
 }
 
 function normalizeColumns(columns) {

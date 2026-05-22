@@ -27,9 +27,9 @@ GET http://localhost:3000/api/amd/cpus
 ```
 
 The Intel response includes discovered SKUs and grouped Intel ARK spec sections.
-The AMD response maps the official AMD processor specification table columns
-into spec rows for desktop, laptop, workstation, server, and embedded CPU
-tables. API responses contain only selected CPU product rows from the dataset.
+The AMD response maps the official AMD processor specification fields into spec
+rows for desktop, laptop, workstation, server, and embedded CPUs. API responses
+contain only selected CPU product rows from the dataset.
 Once a full dataset has been collected, normal requests read the saved snapshots
 instead of fetching upstream pages again:
 
@@ -70,8 +70,10 @@ matches memory type/system memory fields such as `DDR4` or `DDR5`. Core and
 thread filters exact-match numeric spec values. `speed` exact-matches CPU
 frequency/clock fields in GHz; both `speed=2.8` and `speed=2.8GHz` work.
 Use `columns` with comma-separated product fields such as
-`id,name,family,url,specs` to trim each returned CPU row. Filtering still uses
-the full saved row before column selection is applied.
+`id,name,family,url,specs` to trim each returned CPU row. It can also select
+vendor spec fields, for example `name,CPU Socket,Memory Types`; matching spec
+entries are returned under `specs` and the rest are omitted. Filtering still
+uses the full saved row before column selection is applied.
 Available results depend on which fields the vendor source exposes for each CPU
 row.
 
@@ -97,11 +99,12 @@ INTEL_SYNC_INTERVAL_MS=300000
 INTEL_SYNC_LIMIT=4
 ```
 
-AMD refreshes use the official specification table pages, not one detail-page
-request per CPU. Requests are spaced by `AMD_REQUEST_INTERVAL_MS` and retry
-rate-limit/server-busy responses up to `AMD_MAX_RETRIES` times. The AMD endpoint
-returns `502 amd_source_unavailable` if the upstream refresh fails; a saved AMD
-dataset remains available to normal requests.
+AMD refreshes use the official specification pages and their embedded product
+data, not one detail-page request per CPU. Requests are spaced by
+`AMD_REQUEST_INTERVAL_MS` and retry rate-limit/server-busy responses up to
+`AMD_MAX_RETRIES` times. The AMD endpoint returns `502 amd_source_unavailable`
+if the upstream refresh fails; a saved AMD dataset remains available to normal
+requests.
 
 ## RapidAPI
 

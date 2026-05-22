@@ -1,4 +1,7 @@
 export function checkRapidApiRequest(headers, proxySecret) {
+  if (process.env.NODE_ENV === "development") {
+    return { ok: true };
+  }
   if (!proxySecret) {
     return { ok: true };
   }

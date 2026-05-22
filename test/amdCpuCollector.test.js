@@ -32,6 +32,27 @@ test("AMD specification parser maps model rows into product specs", () => {
   });
 });
 
+test("AMD specification parser maps current embedded product rows into product specs", () => {
+  const products = parseAmdSpecificationPage(specificationData(), clientPage);
+
+  assert.deepEqual(products, [
+    {
+      id: "amd-ryzen-9-9950x",
+      name: "AMD Ryzen 9 9950X",
+      family: clientPage.family,
+      url: "https://www.amd.com/en/products/processors/desktops/ryzen/amd-ryzen-9-9950x.html",
+      specs: {
+        Specifications: {
+          "CPU Socket": "AM5",
+          "# of CPU Cores": "16",
+          "System Memory Type": "DDR5",
+          "Max. Boost Clock": "Up to 5.7 GHz"
+        }
+      }
+    }
+  ]);
+});
+
 test("AMD collector spaces page requests and retries rate limits", async () => {
   let now = 0;
   const sleeps = [];
@@ -85,5 +106,41 @@ function specificationTable(firstModel = "AMD Ryzen 9 9950X") {
         </tr>
       </tbody>
     </table>
+  `;
+}
+
+function specificationData() {
+  return `
+    <div data-json='{
+      "items": [
+        {
+          "productPages": {
+            "en": "https://www.amd.com/en/products/processors/desktops/ryzen/amd-ryzen-9-9950x.html"
+          },
+          "elements": {
+            "name": {
+              "title": "Name",
+              "formatValue": "AMD Ryzen 9 9950X"
+            },
+            "cpuSocket": {
+              "title": "CPU Socket",
+              "formatValue": ["AM5"]
+            },
+            "numOfCpuCores": {
+              "title": "# of CPU Cores",
+              "formatValue": "16"
+            },
+            "systemMemoryType": {
+              "title": "System Memory Type",
+              "formatValue": ["DDR5"]
+            },
+            "maxBoostClock": {
+              "title": "Max. Boost Clock",
+              "formatValue": "Up to 5.7 GHz"
+            }
+          }
+        }
+      ]
+    }'></div>
   `;
 }

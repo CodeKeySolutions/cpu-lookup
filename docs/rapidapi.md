@@ -59,7 +59,7 @@ Both CPU endpoints accept the same public query parameters.
 | `cores` | number | Exact-match exposed CPU core count fields. | `16` |
 | `threads` | number | Exact-match exposed thread count fields. | `32` |
 | `speed` | string | Exact-match exposed processor frequency or clock fields. | `5.7` |
-| `columns` | string | Return only comma-separated product fields such as `id`, `name`, `family`, `url`, or `specs`. | `id,name,family` |
+| `columns` | string | Return only comma-separated product fields or vendor spec fields. | `name,CPU Socket,Memory Types` |
 
 `speed` treats plain numeric values as GHz. Values such as `5.7GHz` and
 `5700MHz` are also accepted by the filter logic.
@@ -82,10 +82,10 @@ Get AMD AM5 CPUs with DDR5 support:
 GET /api/amd/cpus?socket=AM5&ram=DDR5
 ```
 
-Get compact AMD rows with only model identity fields:
+Get compact AMD rows with only selected product and spec fields:
 
 ```text
-GET /api/amd/cpus?columns=id,name,family&socket=AM5
+GET /api/amd/cpus?columns=name,CPU%20Socket,Memory%20Types&socket=AM5
 ```
 
 Get Intel server CPUs with ECC support:

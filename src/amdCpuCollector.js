@@ -97,8 +97,7 @@ export class AmdCpuCollector {
           headers: {
             accept: "text/html,application/xhtml+xml",
             "accept-language": "en-US,en;q=0.9",
-            "user-agent":
-              "Mozilla/5.0 (compatible; CpuSpecsApi/1.0; +https://amd.com)"
+            "user-agent": "Mozilla/5.0"
           },
           signal: AbortSignal.timeout(this.timeoutMs)
         });
@@ -143,6 +142,14 @@ export class AmdCpuCollector {
 
 export function parseAmdSpecificationPage(html, page) {
   const $ = cheerio.load(html);
+  const products = parseSpecificationTables($, page);
+
+  products.push(...parseProductSpecData($, page));
+
+  return products;
+}
+
+function parseSpecificationTables($, page) {
   const products = [];
 
   $("table").each((_, tableNode) => {
@@ -166,6 +173,24 @@ export function parseAmdSpecificationPage(html, page) {
         products.push(product);
       }
     });
+  });
+
+  return products;
+}
+
+function parseProductSpecData($, page) {
+  const products = [];
+
+  $("[data-json]").each((_, dataNode) => {
+    const data = parseDataJson($(dataNode).attr("data-json"));
+
+    for (const item of data?.items ?? []) {
+      const product = productFromDataItem(item, page);
+
+      if (product) {
+        products.push(product);
+      }
+    }
   });
 
   return products;
@@ -197,6 +222,38 @@ function productFromRow($, cells, headers, page) {
   if (!name) {
     return null;
   }
+
+  return {
+    id: amdId(url, name),
+    name,
+    family: page.family,
+    url: url || page.url,
+    specs: {
+      Specifications: specs
+    }
+  };
+}
+
+function productFromDataItem(item, page) {
+  const specs = {};
+  const name = dataValue(item.elements?.name);
+
+  if (!name) {
+    return null;
+  }
+
+  for (const element of Object.values(item.elements ?? {})) {
+    const title = cleanText(element?.title);
+    const value = dataValue(element);
+
+    if (!title || !value || isModelHeader(title)) {
+      continue;
+    }
+
+    specs[title] = value;
+  }
+
+  const url = canonicalAmdUrl(item.productPages?.en, page.url);
 
   return {
     id: amdId(url, name),
@@ -247,6 +304,36 @@ function amdId(url, name) {
 
 function isModelHeader(header) {
   return /^name$/i.test(header) || /model|product name|processor name/i.test(header);
+}
+
+function dataValue(element) {
+  const value = element?.formatValue ?? element?.value;
+
+  if (Array.isArray(value)) {
+    return cleanText(value.map(dataText).filter(Boolean).join(", "));
+  }
+
+  return cleanText(dataText(value));
+}
+
+function dataText(value) {
+  if (value === undefined || value === null || typeof value === "object") {
+    return "";
+  }
+
+  return String(value);
+}
+
+function parseDataJson(value) {
+  if (!value) {
+    return null;
+  }
+
+  try {
+    return JSON.parse(value);
+  } catch {
+    return null;
+  }
 }
 
 function retryableStatus(status) {

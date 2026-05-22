@@ -151,12 +151,13 @@ components:
       name: columns
       in: query
       description: >
-        Comma-separated product fields to return per CPU row. Common fields
-        are id, name, family, url, and specs. Filters run before this response
-        projection is applied.
+        Comma-separated fields to return per CPU row. Common product fields
+        are id, name, family, url, and specs. Vendor spec fields such as
+        CPU Socket or Memory Types can also be selected and are returned under
+        specs. Filters run before this response projection is applied.
       schema:
         type: string
-      example: id,name,family
+      example: name,CPU Socket,Memory Types
   responses:
     RapidApiUnauthorized:
       description: Request did not pass RapidAPI verification.

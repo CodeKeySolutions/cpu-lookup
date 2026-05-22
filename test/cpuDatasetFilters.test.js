@@ -108,6 +108,25 @@ test("CPU dataset selection projects comma-separated product columns after filte
   ]);
 });
 
+test("CPU dataset selection returns only selected spec columns from products", () => {
+  const selected = selectCpuDataset(dataset(), {
+    columns: "name, CPU Socket, Memory Types",
+    socket: "AM5"
+  });
+
+  assert.deepEqual(selected.products, [
+    {
+      name: "AMD AM5 CPU",
+      specs: {
+        Specifications: {
+          "CPU Socket": "AM5",
+          "Memory Types": "DDR5"
+        }
+      }
+    }
+  ]);
+});
+
 function dataset() {
   return {
     count: 4,
