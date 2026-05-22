@@ -6,10 +6,13 @@ import { createServer } from "../src/server.js";
 let baseUrl;
 let server;
 let amdOptions;
+let rapidApiHost;
 let rapidApiProxySecret;
 
 before(async () => {
+  rapidApiHost = process.env.RAPIDAPI_HOST;
   rapidApiProxySecret = process.env.RAPIDAPI_PROXY_SECRET;
+  delete process.env.RAPIDAPI_HOST;
   delete process.env.RAPIDAPI_PROXY_SECRET;
 
   server = createServer(
@@ -51,6 +54,12 @@ after(async () => {
     delete process.env.RAPIDAPI_PROXY_SECRET;
   } else {
     process.env.RAPIDAPI_PROXY_SECRET = rapidApiProxySecret;
+  }
+
+  if (rapidApiHost === undefined) {
+    delete process.env.RAPIDAPI_HOST;
+  } else {
+    process.env.RAPIDAPI_HOST = rapidApiHost;
   }
 });
 
@@ -123,6 +132,34 @@ test("GET /api/intel/cpus accepts RapidAPI proxy headers when verification is en
     assert.equal(response.status, 200);
     assert.deepEqual(body, [{ id: "intel-1" }]);
   } finally {
+    delete process.env.RAPIDAPI_PROXY_SECRET;
+  }
+});
+
+test("GET /api/intel/cpus checks the configured RapidAPI host", async () => {
+  process.env.RAPIDAPI_PROXY_SECRET = "provider-secret";
+  process.env.RAPIDAPI_HOST = "cpu-lookup.p.rapidapi.com";
+
+  try {
+    const wrongHost = await fetch(`${baseUrl}/api/intel/cpus?limit=1`, {
+      headers: {
+        "X-RapidAPI-Proxy-Secret": "provider-secret",
+        "X-RapidAPI-Host": "other-api.p.rapidapi.com"
+      }
+    });
+    const correctHost = await fetch(`${baseUrl}/api/intel/cpus?limit=1`, {
+      headers: {
+        "X-RapidAPI-Proxy-Secret": "provider-secret",
+        "X-RapidAPI-Host": "cpu-lookup.p.rapidapi.com"
+      }
+    });
+
+    assert.equal(wrongHost.status, 401);
+    assert.equal((await wrongHost.json()).error, "rapidapi_unauthorized");
+    assert.equal(correctHost.status, 200);
+    assert.deepEqual(await correctHost.json(), [{ id: "intel-1" }]);
+  } finally {
+    delete process.env.RAPIDAPI_HOST;
     delete process.env.RAPIDAPI_PROXY_SECRET;
   }
 });

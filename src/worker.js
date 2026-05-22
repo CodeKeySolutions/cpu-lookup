@@ -69,7 +69,11 @@ export async function fetchCpuApi(request, services, env = {}) {
 }
 
 function rapidApiResponse(request, env) {
-  const auth = checkRapidApiRequest(request.headers, env.RAPIDAPI_PROXY_SECRET);
+  const auth = checkRapidApiRequest(
+    request.headers,
+    env.RAPIDAPI_PROXY_SECRET,
+    env.RAPIDAPI_HOST
+  );
 
   if (auth.ok) {
     return null;

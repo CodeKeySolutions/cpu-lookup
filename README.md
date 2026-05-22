@@ -112,11 +112,13 @@ Set `RAPIDAPI_PROXY_SECRET` to require CPU API calls to come through RapidAPI:
 
 ```env
 RAPIDAPI_PROXY_SECRET=your-provider-proxy-secret
+RAPIDAPI_HOST=cpu-lookup.p.rapidapi.com
 ```
 
 When it is configured, `/api/intel/cpus` and `/api/amd/cpus` require
 RapidAPI's `X-RapidAPI-Proxy-Secret` header to match that configured secret.
-`/health` stays public. Leave the secret unset for local direct calls.
+When `RAPIDAPI_HOST` is set, the forwarded `X-RapidAPI-Host` header must match
+it too. `/health` stays public. Leave the secret unset for local direct calls.
 
 For Cloudflare, keep the provider proxy secret out of `wrangler.jsonc`:
 

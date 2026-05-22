@@ -30,7 +30,8 @@ export function createServer(
     if (request.method === "GET" && url.pathname === "/api/intel/cpus") {
       const rapidApiAuth = checkRapidApiRequest(
         request.headers,
-        process.env.RAPIDAPI_PROXY_SECRET
+        process.env.RAPIDAPI_PROXY_SECRET,
+        process.env.RAPIDAPI_HOST
       );
 
       if (!rapidApiAuth.ok) {
@@ -69,7 +70,8 @@ export function createServer(
     if (request.method === "GET" && url.pathname === "/api/amd/cpus") {
       const rapidApiAuth = checkRapidApiRequest(
         request.headers,
-        process.env.RAPIDAPI_PROXY_SECRET
+        process.env.RAPIDAPI_PROXY_SECRET,
+        process.env.RAPIDAPI_HOST
       );
 
       if (!rapidApiAuth.ok) {

@@ -1,4 +1,4 @@
-export function checkRapidApiRequest(headers, proxySecret) {
+export function checkRapidApiRequest(headers, proxySecret, expectedHost) {
   if (process.env.NODE_ENV === "development") {
     return { ok: true };
   }
@@ -6,6 +6,14 @@ export function checkRapidApiRequest(headers, proxySecret) {
     return { ok: true };
   }
 
+  const requestHost = headerValue(headers, "x-rapidapi-host");
+
+  if (expectedHost && (!requestHost || !sameValue(requestHost, expectedHost))) {
+    return {
+      ok: false,
+      message: "Request used an unexpected RapidAPI host."
+    };
+  }
   const requestSecret = headerValue(headers, "x-rapidapi-proxy-secret");
 
   if (!requestSecret || !sameValue(requestSecret, proxySecret)) {
@@ -14,6 +22,8 @@ export function checkRapidApiRequest(headers, proxySecret) {
       message: "Request was not verified as RapidAPI proxy traffic."
     };
   }
+
+  
 
   return { ok: true };
 }

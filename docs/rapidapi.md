@@ -24,7 +24,9 @@ X-RapidAPI-Key: <consumer-key>
 
 The provider deployment can set `RAPIDAPI_PROXY_SECRET` to allow CPU endpoint
 requests only when RapidAPI forwards the matching `X-RapidAPI-Proxy-Secret`
-header. That provider secret must not be documented or sent by consumers.
+header. With `RAPIDAPI_HOST=cpu-lookup.p.rapidapi.com`, the provider also
+checks the forwarded `X-RapidAPI-Host` header. The provider secret must not be
+documented or sent by consumers.
 
 ## Public Endpoints
 

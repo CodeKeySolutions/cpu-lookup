@@ -111,6 +111,31 @@ test("Worker API accepts RapidAPI proxy headers when verification is enabled", a
   assert.deepEqual(await response.json(), [{ id: "amd-1" }]);
 });
 
+test("Worker API checks the configured RapidAPI host", async () => {
+  const response = await fetchCpuApi(
+    new Request("https://cpu.example/api/amd/cpus?limit=1", {
+      headers: {
+        "X-RapidAPI-Proxy-Secret": "provider-secret",
+        "X-RapidAPI-Host": "other-api.p.rapidapi.com"
+      }
+    }),
+    {
+      amdDataset: {
+        async get() {
+          throw new Error("Wrong RapidAPI hosts should not reach the dataset.");
+        }
+      }
+    },
+    {
+      RAPIDAPI_HOST: "cpu-lookup.p.rapidapi.com",
+      RAPIDAPI_PROXY_SECRET: "provider-secret"
+    }
+  );
+
+  assert.equal(response.status, 401);
+  assert.equal((await response.json()).error, "rapidapi_unauthorized");
+});
+
 test("Worker services read cached Intel rows from R2", async () => {
   const services = createWorkerServices({
     CPU_DATA: {
