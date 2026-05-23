@@ -17,7 +17,7 @@ test("Worker API returns filtered CPU datasets", async () => {
   let options;
   const response = await fetchCpuApi(
     new Request(
-      "https://cpu.example/api/intel/cpus?limit=1&columns=id,name&cores=8&ram=DDR5&server=false"
+      "https://cpu.example/api/intel/cpus?limit=1&column=id,name&cores=8&ram=DDR5&server=false"
     ),
     {
       intelDataset: {

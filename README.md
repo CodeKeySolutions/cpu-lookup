@@ -69,7 +69,7 @@ specification field names containing `socket` or `chipset`. The RAM filter
 matches memory type/system memory fields such as `DDR4` or `DDR5`. Core and
 thread filters exact-match numeric spec values. `speed` exact-matches CPU
 frequency/clock fields in GHz; both `speed=2.8` and `speed=2.8GHz` work.
-Use `columns` with comma-separated product fields such as
+Use `columns` or `column` with comma-separated product fields such as
 `id,name,family,url,specs` to trim each returned CPU row. It can also select
 vendor spec fields, for example `name,CPU Socket,Memory Types`; matching spec
 entries are returned under `specs` and the rest are omitted. Filtering still

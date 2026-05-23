@@ -114,7 +114,7 @@ async function datasetResponse(dataset, url, SourceError, source) {
 function datasetOptions(url) {
   return {
     chipset: url.searchParams.get("chipset"),
-    columns: url.searchParams.get("columns"),
+    columns: columnFilter(url.searchParams),
     cores: url.searchParams.get("cores"),
     ecc: url.searchParams.get("ecc"),
     ram: url.searchParams.get("ram"),
@@ -125,6 +125,11 @@ function datasetOptions(url) {
     speed: url.searchParams.get("speed"),
     threads: url.searchParams.get("threads")
   };
+}
+
+function columnFilter(searchParams) {
+  const columns = searchParams.get("columns");
+  return columns === null || columns === "" ? searchParams.get("column") : columns;
 }
 
 function json(body, status = 200) {

@@ -154,7 +154,8 @@ components:
         Comma-separated fields to return per CPU row. Common product fields
         are id, name, family, url, and specs. Vendor spec fields such as
         CPU Socket or Memory Types can also be selected and are returned under
-        specs. Filters run before this response projection is applied.
+        specs. Filters run before this response projection is applied. The
+        singular column query name is also accepted by the API.
       schema:
         type: string
       example: name,CPU Socket,Memory Types

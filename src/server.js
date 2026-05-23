@@ -44,7 +44,7 @@ export function createServer(
       try {
         const result = await intelCpuDataset.get({
           chipset: url.searchParams.get("chipset"),
-          columns: url.searchParams.get("columns"),
+          columns: columnFilter(url.searchParams),
           cores: url.searchParams.get("cores"),
           ecc: url.searchParams.get("ecc"),
           ram: url.searchParams.get("ram"),
@@ -84,7 +84,7 @@ export function createServer(
       try {
         const result = await amdCpuDataset.get({
           chipset: url.searchParams.get("chipset"),
-          columns: url.searchParams.get("columns"),
+          columns: columnFilter(url.searchParams),
           cores: url.searchParams.get("cores"),
           ecc: url.searchParams.get("ecc"),
           ram: url.searchParams.get("ram"),
@@ -119,6 +119,11 @@ function json(response, statusCode, body) {
     "content-type": "application/json; charset=utf-8"
   });
   response.end(JSON.stringify(body));
+}
+
+function columnFilter(searchParams) {
+  const columns = searchParams.get("columns");
+  return columns === null || columns === "" ? searchParams.get("column") : columns;
 }
 
 function envNumber(name) {

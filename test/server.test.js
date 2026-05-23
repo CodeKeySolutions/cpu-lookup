@@ -186,3 +186,12 @@ test("GET /api/amd/cpus passes collection options", async () => {
     threads: "32"
   });
 });
+
+test("GET /api/amd/cpus accepts column as a columns alias", async () => {
+  const response = await fetch(`${baseUrl}/api/amd/cpus?column=id,name`);
+  const body = await response.json();
+
+  assert.equal(response.status, 200);
+  assert.deepEqual(body, [{ id: "amd-1" }]);
+  assert.equal(amdOptions.columns, "id,name");
+});

@@ -61,7 +61,7 @@ Both CPU endpoints accept the same public query parameters.
 | `cores` | number | Exact-match exposed CPU core count fields. | `16` |
 | `threads` | number | Exact-match exposed thread count fields. | `32` |
 | `speed` | string | Exact-match exposed processor frequency or clock fields. | `5.7` |
-| `columns` | string | Return only comma-separated product fields or vendor spec fields. | `name,CPU Socket,Memory Types` |
+| `columns` / `column` | string | Return only comma-separated product fields or vendor spec fields. | `name,CPU Socket,Memory Types` |
 
 `speed` treats plain numeric values as GHz. Values such as `5.7GHz` and
 `5700MHz` are also accepted by the filter logic.
