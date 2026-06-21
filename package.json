@@ -8,6 +8,9 @@
     "dev:worker": "wrangler dev",
     "start": "node --env-file-if-exists=.env src/server.js",
     "test": "node --test",
+    "upload:login": "wrangler login",
+    "upload:amd": "npx wrangler r2 object put cpu-specs-data/cpus/amd.json --file=data/cpus/amd.json --remote",
+    "upload:intel":"npx wrangler r2 object put cpu-specs-data/cpus/intel.json --file=data/cpus/intel.json --remote",
     "deploy": "wrangler deploy"
   },
   "dependencies": {

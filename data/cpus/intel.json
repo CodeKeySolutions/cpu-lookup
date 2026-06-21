@@ -2,8 +2,8 @@
   "source": "Intel Product Specifications (ARK)",
   "sourceUrl": "https://www.intel.com/content/www/us/en/ark.html",
   "collectedAt": "2026-05-21T12:32:28.134Z",
-  "count": 2267,
-  "discoveredCount": 2267,
+  "count": 2271,
+  "discoveredCount": 2269,
   "products": [
     {
       "id": "237751",
@@ -136456,6 +136456,87 @@
       }
     },
     {
+      "id": "246077",
+      "name": "Intel® Xeon® 6960E+ processor",
+      "family": "Intel® Xeon® 6+ processors",
+      "url": "https://www.intel.com/content/www/us/en/products/sku/246077/intel-xeon-6960e-processor-432m-cache-2-40-ghz/specifications.html",
+      "specs": {
+        "Essentials": {
+          "Product Collection": "Intel® Xeon® 6+ processors",
+          "Code Name": "Products formerly Clearwater Forest",
+          "Processor Number": "6960E+",
+          "Lithography": "Intel 18A"
+        },
+        "CPU Specifications": {
+          "Total Cores": "144",
+          "# of Performance-cores": "0",
+          "# of Efficient-cores": "144",
+          "Total Threads": "144",
+          "Max Turbo Frequency": "3.2 GHz",
+          "All Core Turbo Frequency": "3 GHz",
+          "Processor Base Frequency": "2.4 GHz",
+          "Cache": "432 MB",
+          "Intel® UPI Speed": "24 GT/s",
+          "Max # of UPI Links": "6",
+          "TDP": "330 W"
+        },
+        "Supplemental Information": {
+          "Marketing Status": "Launched",
+          "Launch Date": "Q2'26",
+          "Embedded Options Available": "Yes"
+        },
+        "Memory Specifications": {
+          "Max Memory Size (dependent on memory type)": "1.5 TB",
+          "Memory Types": "DDR5-RDIMM-8000MT/s-1DPC",
+          "Maximum Memory Speed": "8000 MHz",
+          "Max # of Memory Channels": "12",
+          "ECC Memory Supported ‡": "Yes"
+        },
+        "Expansion Options": {
+          "Scalability": "2S",
+          "PCI Express Revision": "Gen5",
+          "Max # of PCI Express Lanes": "96"
+        },
+        "Package Specifications": {
+          "Package Carrier": "BR1B",
+          "DTS Max": "98 °C",
+          "TCASE": "72",
+          "Package Size": "104.5mm x 70.5mm"
+        },
+        "Advanced Technologies": {
+          "Intel® QuickAssist Technology (QAT)": "4 default devices",
+          "Intel® Dynamic Load Balancer (DLB)": "4 default devices",
+          "Intel® Data Streaming Accelerator (DSA)": "4 default devices",
+          "Intel® In-memory Analytics Accelerator (IAA)": "4 default devices",
+          "Intel® Deep Learning Boost (Intel® DL Boost) on CPU": "Yes",
+          "Intel® Resource Director Technology (Intel® RDT)": "Yes",
+          "Intel® 64 ‡": "Yes",
+          "Instruction Set Extensions": "Intel® AVX2",
+          "Intel® Application Energy Telemetry (Intel® AET)": "Yes"
+        },
+        "Security & Reliability": {
+          "Intel® Trust Domain Extensions (Intel® TDX)": "Yes",
+          "Intel® Crypto Acceleration": "Yes",
+          "Intel® QuickAssist Software Acceleration": "Yes",
+          "Intel® Platform Firmware Resilience Support": "Yes",
+          "Intel® Control-Flow Enforcement Technology": "Yes",
+          "Intel® Total Memory Encryption - Multi Key": "Yes",
+          "MK-TME Total": "1024",
+          "Intel® Total Memory Encryption": "Yes",
+          "Intel® AES New Instructions": "Yes",
+          "Intel® Software Guard Extensions (Intel® SGX)": "Yes",
+          "Default Maximum Enclave Page Cache (EPC) Size for Intel® SGX": "512 GB",
+          "Intel® OS Guard": "Yes",
+          "Intel® Trusted Execution Technology ‡": "Yes",
+          "Execute Disable Bit ‡": "Yes",
+          "Intel® Boot Guard": "Yes",
+          "Mode-based Execute Control (MBEC)": "Yes",
+          "Intel® Virtualization Technology (VT-x) ‡": "Yes",
+          "Intel® Virtualization Technology for Directed I/O (VT-d) ‡": "Yes"
+        }
+      }
+    },
+    {
       "id": "240775",
       "name": "Intel® Xeon® 6960P Processor",
       "family": "Intel® Xeon® 6 processors",
@@ -136759,6 +136840,87 @@
           "Intel® Virtualization Technology (VT-x) ‡": "Yes",
           "Intel® Virtualization Technology for Directed I/O (VT-d) ‡": "Yes",
           "Intel® VT-x with Extended Page Tables (EPT) ‡": "Yes"
+        }
+      }
+    },
+    {
+      "id": "246083",
+      "name": "Intel® Xeon® 6970E+ processor",
+      "family": "Intel® Xeon® 6+ processors",
+      "url": "https://www.intel.com/content/www/us/en/products/sku/246083/intel-xeon-6970e-processor-480m-cache-2-30-ghz/specifications.html",
+      "specs": {
+        "Essentials": {
+          "Product Collection": "Intel® Xeon® 6+ processors",
+          "Code Name": "Products formerly Clearwater Forest",
+          "Processor Number": "6970E+",
+          "Lithography": "Intel 18A"
+        },
+        "CPU Specifications": {
+          "Total Cores": "192",
+          "# of Performance-cores": "0",
+          "# of Efficient-cores": "192",
+          "Total Threads": "192",
+          "Max Turbo Frequency": "3.2 GHz",
+          "All Core Turbo Frequency": "3 GHz",
+          "Processor Base Frequency": "2.3 GHz",
+          "Cache": "480 MB",
+          "Intel® UPI Speed": "24 GT/s",
+          "Max # of UPI Links": "6",
+          "TDP": "400 W"
+        },
+        "Supplemental Information": {
+          "Marketing Status": "Launched",
+          "Launch Date": "Q2'26",
+          "Embedded Options Available": "Yes"
+        },
+        "Memory Specifications": {
+          "Max Memory Size (dependent on memory type)": "1.5 TB",
+          "Memory Types": "DDR5-RDIMM-8000MT/s-1DPC",
+          "Maximum Memory Speed": "8000 MHz",
+          "Max # of Memory Channels": "12",
+          "ECC Memory Supported ‡": "Yes"
+        },
+        "Expansion Options": {
+          "Scalability": "2S",
+          "PCI Express Revision": "Gen5",
+          "Max # of PCI Express Lanes": "96"
+        },
+        "Package Specifications": {
+          "Package Carrier": "BR1B",
+          "DTS Max": "102 °C",
+          "TCASE": "79",
+          "Package Size": "104.5mm x 70.5mm"
+        },
+        "Advanced Technologies": {
+          "Intel® QuickAssist Technology (QAT)": "4 default devices",
+          "Intel® Dynamic Load Balancer (DLB)": "4 default devices",
+          "Intel® Data Streaming Accelerator (DSA)": "4 default devices",
+          "Intel® In-memory Analytics Accelerator (IAA)": "4 default devices",
+          "Intel® Deep Learning Boost (Intel® DL Boost) on CPU": "Yes",
+          "Intel® Resource Director Technology (Intel® RDT)": "Yes",
+          "Intel® 64 ‡": "Yes",
+          "Instruction Set Extensions": "Intel® AVX2",
+          "Intel® Application Energy Telemetry (Intel® AET)": "Yes"
+        },
+        "Security & Reliability": {
+          "Intel® Trust Domain Extensions (Intel® TDX)": "Yes",
+          "Intel® Crypto Acceleration": "Yes",
+          "Intel® QuickAssist Software Acceleration": "Yes",
+          "Intel® Platform Firmware Resilience Support": "Yes",
+          "Intel® Control-Flow Enforcement Technology": "Yes",
+          "Intel® Total Memory Encryption - Multi Key": "Yes",
+          "MK-TME Total": "1024",
+          "Intel® Total Memory Encryption": "Yes",
+          "Intel® AES New Instructions": "Yes",
+          "Intel® Software Guard Extensions (Intel® SGX)": "Yes",
+          "Default Maximum Enclave Page Cache (EPC) Size for Intel® SGX": "512 GB",
+          "Intel® OS Guard": "Yes",
+          "Intel® Trusted Execution Technology ‡": "Yes",
+          "Execute Disable Bit ‡": "Yes",
+          "Intel® Boot Guard": "Yes",
+          "Mode-based Execute Control (MBEC)": "Yes",
+          "Intel® Virtualization Technology (VT-x) ‡": "Yes",
+          "Intel® Virtualization Technology for Directed I/O (VT-d) ‡": "Yes"
         }
       }
     },
@@ -137070,6 +137232,96 @@
       }
     },
     {
+      "id": "246075",
+      "name": "Intel® Xeon® 6980E+ processor",
+      "family": "Intel® Xeon® 6+ processors",
+      "url": "https://www.intel.com/content/www/us/en/products/sku/246075/intel-xeon-6980e-processor-528m-cache-2-10-ghz/specifications.html",
+      "specs": {
+        "Essentials": {
+          "Product Collection": "Intel® Xeon® 6+ processors",
+          "Code Name": "Products formerly Clearwater Forest",
+          "Processor Number": "6980E+",
+          "Lithography": "Intel 18A"
+        },
+        "CPU Specifications": {
+          "Total Cores": "264",
+          "# of Performance-cores": "0",
+          "# of Efficient-cores": "264",
+          "Total Threads": "264",
+          "Max Turbo Frequency": "3.2 GHz",
+          "All Core Turbo Frequency": "2.7 GHz",
+          "Processor Base Frequency": "2.1 GHz",
+          "Cache": "528 MB",
+          "Intel® UPI Speed": "24 GT/s",
+          "Max # of UPI Links": "6",
+          "TDP": "400 W"
+        },
+        "Intel® Speed Select Technology - Performance Profile (Intel® SST-PP)": {
+          "Config": "Active Cores",
+          "6980E+ (0)": "264",
+          "6980E+ (1)": "264"
+        },
+        "Supplemental Information": {
+          "Marketing Status": "Launched",
+          "Launch Date": "Q2'26",
+          "Embedded Options Available": "Yes"
+        },
+        "Memory Specifications": {
+          "Max Memory Size (dependent on memory type)": "1.5 TB",
+          "Memory Types": "DDR5-RDIMM-8000MT/s-1DPC",
+          "Maximum Memory Speed": "8000 MHz",
+          "Max # of Memory Channels": "12",
+          "ECC Memory Supported ‡": "Yes"
+        },
+        "Expansion Options": {
+          "Scalability": "2S",
+          "PCI Express Revision": "Gen5",
+          "Max # of PCI Express Lanes": "96"
+        },
+        "Package Specifications": {
+          "Package Carrier": "BR1B",
+          "DTS Max": "99 °C",
+          "TCASE": "79",
+          "Package Size": "104.5mm x 70.5mm"
+        },
+        "Advanced Technologies": {
+          "Intel® QuickAssist Technology (QAT)": "4 default devices",
+          "Intel® Dynamic Load Balancer (DLB)": "4 default devices",
+          "Intel® Data Streaming Accelerator (DSA)": "4 default devices",
+          "Intel® In-memory Analytics Accelerator (IAA)": "4 default devices",
+          "Intel® Speed Select Technology – Core Power": "Yes",
+          "Intel® Speed Select Technology – Turbo Frequency": "Yes",
+          "Intel® Deep Learning Boost (Intel® DL Boost) on CPU": "Yes",
+          "Intel® Speed Select Technology - Performance Profile": "Yes",
+          "Intel® Speed Select Technology - Base Frequency": "Yes",
+          "Intel® Resource Director Technology (Intel® RDT)": "Yes",
+          "Intel® 64 ‡": "Yes",
+          "Instruction Set Extensions": "Intel® AVX2",
+          "Intel® Application Energy Telemetry (Intel® AET)": "Yes"
+        },
+        "Security & Reliability": {
+          "Intel® Trust Domain Extensions (Intel® TDX)": "Yes",
+          "Intel® Crypto Acceleration": "Yes",
+          "Intel® QuickAssist Software Acceleration": "Yes",
+          "Intel® Platform Firmware Resilience Support": "Yes",
+          "Intel® Control-Flow Enforcement Technology": "Yes",
+          "Intel® Total Memory Encryption - Multi Key": "Yes",
+          "MK-TME Total": "1024",
+          "Intel® Total Memory Encryption": "Yes",
+          "Intel® AES New Instructions": "Yes",
+          "Intel® Software Guard Extensions (Intel® SGX)": "Yes",
+          "Default Maximum Enclave Page Cache (EPC) Size for Intel® SGX": "512 GB",
+          "Intel® OS Guard": "Yes",
+          "Intel® Trusted Execution Technology ‡": "Yes",
+          "Execute Disable Bit ‡": "Yes",
+          "Intel® Boot Guard": "Yes",
+          "Mode-based Execute Control (MBEC)": "Yes",
+          "Intel® Virtualization Technology (VT-x) ‡": "Yes",
+          "Intel® Virtualization Technology for Directed I/O (VT-d) ‡": "Yes"
+        }
+      }
+    },
+    {
       "id": "240777",
       "name": "Intel® Xeon® 6980P Processor",
       "family": "Intel® Xeon® 6 processors",
@@ -137269,6 +137521,96 @@
           "Intel® Virtualization Technology (VT-x) ‡": "Yes",
           "Intel® Virtualization Technology for Directed I/O (VT-d) ‡": "Yes",
           "Intel® VT-x with Extended Page Tables (EPT) ‡": "Yes"
+        }
+      }
+    },
+    {
+      "id": "246074",
+      "name": "Intel® Xeon® 6990E+ processor",
+      "family": "Intel® Xeon® 6+ processors",
+      "url": "https://www.intel.com/content/www/us/en/products/sku/246074/intel-xeon-6990e-processor-576m-cache-2-20-ghz/specifications.html",
+      "specs": {
+        "Essentials": {
+          "Product Collection": "Intel® Xeon® 6+ processors",
+          "Code Name": "Products formerly Clearwater Forest",
+          "Processor Number": "6990E+",
+          "Lithography": "Intel 18A"
+        },
+        "CPU Specifications": {
+          "Total Cores": "288",
+          "# of Performance-cores": "0",
+          "# of Efficient-cores": "288",
+          "Total Threads": "288",
+          "Max Turbo Frequency": "3.2 GHz",
+          "All Core Turbo Frequency": "2.8 GHz",
+          "Processor Base Frequency": "2.2 GHz",
+          "Cache": "576 MB",
+          "Intel® UPI Speed": "24 GT/s",
+          "Max # of UPI Links": "6",
+          "TDP": "450 W"
+        },
+        "Intel® Speed Select Technology - Performance Profile (Intel® SST-PP)": {
+          "Config": "Active Cores",
+          "6990E+ (0)": "288",
+          "6990E+ (1)": "288"
+        },
+        "Supplemental Information": {
+          "Marketing Status": "Launched",
+          "Launch Date": "Q2'26",
+          "Embedded Options Available": "Yes"
+        },
+        "Memory Specifications": {
+          "Max Memory Size (dependent on memory type)": "1.5 TB",
+          "Memory Types": "DDR5-RDIMM-8000MT/s-1DPC",
+          "Maximum Memory Speed": "8000 MHz",
+          "Max # of Memory Channels": "12",
+          "ECC Memory Supported ‡": "Yes"
+        },
+        "Expansion Options": {
+          "Scalability": "2S",
+          "PCI Express Revision": "Gen5",
+          "Max # of PCI Express Lanes": "96"
+        },
+        "Package Specifications": {
+          "Package Carrier": "BR1B",
+          "DTS Max": "98 °C",
+          "TCASE": "76",
+          "Package Size": "104.5mm x 70.5mm"
+        },
+        "Advanced Technologies": {
+          "Intel® QuickAssist Technology (QAT)": "4 default devices",
+          "Intel® Dynamic Load Balancer (DLB)": "4 default devices",
+          "Intel® Data Streaming Accelerator (DSA)": "4 default devices",
+          "Intel® In-memory Analytics Accelerator (IAA)": "4 default devices",
+          "Intel® Speed Select Technology – Core Power": "Yes",
+          "Intel® Speed Select Technology – Turbo Frequency": "Yes",
+          "Intel® Deep Learning Boost (Intel® DL Boost) on CPU": "Yes",
+          "Intel® Speed Select Technology - Performance Profile": "Yes",
+          "Intel® Speed Select Technology - Base Frequency": "Yes",
+          "Intel® Resource Director Technology (Intel® RDT)": "Yes",
+          "Intel® 64 ‡": "Yes",
+          "Instruction Set Extensions": "Intel® AVX2",
+          "Intel® Application Energy Telemetry (Intel® AET)": "Yes"
+        },
+        "Security & Reliability": {
+          "Intel® Trust Domain Extensions (Intel® TDX)": "Yes",
+          "Intel® Crypto Acceleration": "Yes",
+          "Intel® QuickAssist Software Acceleration": "Yes",
+          "Intel® Platform Firmware Resilience Support": "Yes",
+          "Intel® Control-Flow Enforcement Technology": "Yes",
+          "Intel® Total Memory Encryption - Multi Key": "Yes",
+          "MK-TME Total": "1024",
+          "Intel® Total Memory Encryption": "Yes",
+          "Intel® AES New Instructions": "Yes",
+          "Intel® Software Guard Extensions (Intel® SGX)": "Yes",
+          "Default Maximum Enclave Page Cache (EPC) Size for Intel® SGX": "512 GB",
+          "Intel® OS Guard": "Yes",
+          "Intel® Trusted Execution Technology ‡": "Yes",
+          "Execute Disable Bit ‡": "Yes",
+          "Intel® Boot Guard": "Yes",
+          "Mode-based Execute Control (MBEC)": "Yes",
+          "Intel® Virtualization Technology (VT-x) ‡": "Yes",
+          "Intel® Virtualization Technology for Directed I/O (VT-d) ‡": "Yes"
         }
       }
     },
@@ -208247,5 +208589,5 @@
     }
   ],
   "partial": true,
-  "lastCheckedAt": "2026-05-30T16:24:02.397Z"
+  "lastCheckedAt": "2026-06-21T07:28:37.706Z"
 }
