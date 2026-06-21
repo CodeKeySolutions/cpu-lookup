@@ -1,6 +1,6 @@
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "cpu-specs-api",
+	"name": "cpu-lookup",
 	"main": "src/worker.js",
 	"compatibility_date": "2026-05-21",
 	"compatibility_flags": [
