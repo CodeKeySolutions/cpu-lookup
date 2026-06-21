@@ -2,8 +2,8 @@
   "source": "Intel Product Specifications (ARK)",
   "sourceUrl": "https://www.intel.com/content/www/us/en/ark.html",
   "collectedAt": "2026-05-21T12:32:28.134Z",
-  "count": 2265,
-  "discoveredCount": 2265,
+  "count": 2267,
+  "discoveredCount": 2267,
   "products": [
     {
       "id": "237751",
@@ -10752,6 +10752,264 @@
           "Intel® OS Guard": "Yes",
           "Intel® Boot Guard": "Yes",
           "Mode-based Execute Control (MBEC)": "Yes",
+          "Intel® Virtualization Technology (VT-x) ‡": "Yes",
+          "Intel® Virtualization Technology for Directed I/O (VT-d) ‡": "Yes",
+          "Intel® VT-x with Extended Page Tables (EPT) ‡": "Yes"
+        }
+      }
+    },
+    {
+      "id": "245625",
+      "name": "Intel® Arc™ G3 EXTREME Processor",
+      "family": "Intel® Arc™ G3 Processor Series",
+      "url": "https://www.intel.com/content/www/us/en/products/sku/245625/intel-arc-g3-extreme-processor-12m-cache-up-to-4-70-ghz/specifications.html",
+      "specs": {
+        "Essentials": {
+          "Product Collection": "Intel® Arc™ G3 Processor Series",
+          "Code Name": "Products formerly Panther Lake",
+          "Vertical Segment": "Mobile",
+          "Processor Number": "G3 EXTREME"
+        },
+        "CPU Specifications": {
+          "Total Cores": "14",
+          "# of Performance-cores": "2",
+          "# of Efficient-cores": "8",
+          "# of Low Power Efficient-cores": "4",
+          "Total Threads": "14",
+          "Max Turbo Frequency": "4.7 GHz",
+          "Intel® Turbo Boost Max Technology 3.0 Frequency ‡": "4.7 GHz",
+          "Performance-core Max Turbo Frequency": "4.7 GHz",
+          "Efficient-core Max Turbo Frequency": "3.4 GHz",
+          "Low Power Efficient-core Max Turbo Frequency": "3.1 GHz",
+          "Performance-core Base Frequency": "1.9 GHz",
+          "Efficient-core Base Frequency": "1.5 GHz",
+          "Low Power Efficient-core Base Frequency": "1.5 GHz",
+          "Cache": "12 MB Intel® Smart Cache",
+          "Processor Base Power": "25 W",
+          "Maximum Turbo Power": "80 W",
+          "Minimum Assured Power": "15 W",
+          "Intel® Deep Learning Boost (Intel® DL Boost) on CPU": "Yes",
+          "AI Software Frameworks Supported by CPU": "OpenVINO™, WindowsML, DirectML, ONNX RT, WebNN",
+          "CPU Lithography": "Intel 18A"
+        },
+        "Supplemental Information": {
+          "Marketing Status": "Launched",
+          "Launch Date": "Q2'26",
+          "Embedded Options Available": "No"
+        },
+        "Memory Specifications": {
+          "Max Memory Size (dependent on memory type)": "96 GB",
+          "Memory Types": "Up to LPDDR5X 8533 MT/s",
+          "Max # of Memory Channels": "2"
+        },
+        "GPU Specifications": {
+          "GPU Name‡": "Intel® Arc™ B390 GPU",
+          "Graphics Max Dynamic Frequency": "2.3 GHz",
+          "GPU Peak TOPS (Int8)": "113",
+          "Graphics Output": "eDP1.5, DP 2.1 UHBR20, HDMI 2.1 FRL",
+          "Xe-cores": "12",
+          "Ray Tracing": "Yes",
+          "Max Resolution (DP)‡": "7680 x 4320 @ 60Hz",
+          "Max Resolution (eDP - Integrated Flat Panel)‡": "3840 x 2400 @ 120Hz",
+          "DirectX* Support": "DirectX 12 Ultimate",
+          "OpenGL* Support": "4.6",
+          "OpenCL* Support": "3.0",
+          "H.264 Hardware Encode/Decode": "Yes",
+          "H.265 (HEVC) Hardware Encode/Decode": "Yes",
+          "H.266 (VVC) Hardware Encode/Decode": "Decode Only",
+          "AV1 Encode/Decode": "Yes",
+          "Intel® Quick Sync Video": "Yes",
+          "# of Displays Supported ‡": "2",
+          "Device ID": "0xB080, 0xB082",
+          "Intel® Deep Learning Boost (Intel® DL Boost) on GPU": "Yes",
+          "AI Software Frameworks Supported by GPU": "OpenVINO™, WindowsML, DirectML, ONNX RT, WebGPU, WebNN",
+          "GPU Lithography": "TSMC N3E"
+        },
+        "IPU Specifications": {
+          "Intel® Image Processing Unit Version": "7.5",
+          "Mobile Industry Processor Interface (MIPI)": "CPhy & DPhy",
+          "# of MIPI Lanes & Ports": "6 Lanes & 3 Ports",
+          "Max Resolution (IPU)": "16MP"
+        },
+        "NPU Specifications": {
+          "NPU Peak TOPS (Int8)": "46",
+          "Sparsity Support": "Yes",
+          "Windows Studio Effects Support": "Yes",
+          "AI Software Frameworks Supported by NPU": "OpenVINO™, WindowsML, WebNN, ONNX RT"
+        },
+        "Expansion Options": {
+          "Intel® Thunderbolt™ 4": "Yes",
+          "PCI Express Revision": "5.0 and 4.0",
+          "PCI Express Configurations ‡": "x4 PCIe5 (1x4,2x2),x4 PCIe4 (1x4, 2x2, 4x1)x4 PCIe4 (1x4, 2x2, 4x1)",
+          "Max # of PCI Express Lanes": "12"
+        },
+        "Package Specifications": {
+          "Sockets Supported": "FCBGA2540",
+          "Max Operating Temperature": "100 °C",
+          "Package Size": "50mm x 25mm"
+        },
+        "Advanced Technologies": {
+          "Intel® Thread Director": "Yes",
+          "Intel® Smart Sound Technology": "Yes",
+          "Intel® Wake on Voice": "Yes",
+          "Intel® High Definition Audio": "Yes",
+          "Intel® Adaptix™ Technology": "Yes",
+          "Intel® Speed Shift Technology": "Yes",
+          "Intel® Turbo Boost Max Technology 3.0 ‡": "Yes",
+          "Intel® Turbo Boost Technology ‡": "2.0",
+          "Intel® 64 ‡": "Yes",
+          "Instruction Set": "64-bit",
+          "Instruction Set Extensions": "Intel® SSE4.1, Intel® SSE4.2, Intel® AVX2",
+          "Enhanced Intel SpeedStep® Technology": "Yes",
+          "Thermal Monitoring Technologies": "Yes",
+          "Intel® Volume Management Device (VMD)": "Yes"
+        },
+        "Security & Reliability": {
+          "Intel® Threat Detection Technology (TDT)": "Yes",
+          "Intel® Active Management Technology (AMT) ‡": "No",
+          "Intel® Standard Manageability (ISM) ‡": "Yes",
+          "Intel® Remote Platform Erase (RPE) ‡": "No",
+          "Intel® One-Click Recovery ‡": "No",
+          "Intel® Secure Key": "Yes",
+          "Intel® Control-Flow Enforcement Technology": "Yes",
+          "Intel® Total Memory Encryption - Multi Key": "No",
+          "Intel® AES New Instructions": "Yes",
+          "Intel® Trusted Execution Technology ‡": "Yes",
+          "Execute Disable Bit ‡": "Yes",
+          "Intel® OS Guard": "Yes",
+          "Intel® Boot Guard": "Yes",
+          "Mode-based Execute Control (MBEC)": "Yes",
+          "Intel® Stable IT Platform Program (SIPP)": "No",
+          "Intel® Virtualization Technology with Redirect Protection (VT-rp) ‡": "No",
+          "Intel® Virtualization Technology (VT-x) ‡": "Yes",
+          "Intel® Virtualization Technology for Directed I/O (VT-d) ‡": "Yes",
+          "Intel® VT-x with Extended Page Tables (EPT) ‡": "Yes"
+        }
+      }
+    },
+    {
+      "id": "245626",
+      "name": "Intel® Arc™ G3 Processor",
+      "family": "Intel® Arc™ G3 Processor Series",
+      "url": "https://www.intel.com/content/www/us/en/products/sku/245626/intel-arc-g3-processor-12m-cache-up-to-4-60-ghz/specifications.html",
+      "specs": {
+        "Essentials": {
+          "Product Collection": "Intel® Arc™ G3 Processor Series",
+          "Code Name": "Products formerly Panther Lake",
+          "Vertical Segment": "Mobile",
+          "Processor Number": "G3"
+        },
+        "CPU Specifications": {
+          "Total Cores": "14",
+          "# of Performance-cores": "2",
+          "# of Efficient-cores": "8",
+          "# of Low Power Efficient-cores": "4",
+          "Total Threads": "14",
+          "Max Turbo Frequency": "4.6 GHz",
+          "Intel® Turbo Boost Max Technology 3.0 Frequency ‡": "4.6 GHz",
+          "Performance-core Max Turbo Frequency": "4.6 GHz",
+          "Efficient-core Max Turbo Frequency": "3.3 GHz",
+          "Low Power Efficient-core Max Turbo Frequency": "3.1 GHz",
+          "Performance-core Base Frequency": "1.9 GHz",
+          "Efficient-core Base Frequency": "1.5 GHz",
+          "Low Power Efficient-core Base Frequency": "1.5 GHz",
+          "Cache": "12 MB Intel® Smart Cache",
+          "Processor Base Power": "25 W",
+          "Maximum Turbo Power": "80 W",
+          "Minimum Assured Power": "15 W",
+          "Intel® Deep Learning Boost (Intel® DL Boost) on CPU": "Yes",
+          "AI Software Frameworks Supported by CPU": "OpenVINO™, WindowsML, DirectML, ONNX RT, WebNN",
+          "CPU Lithography": "Intel 18A"
+        },
+        "Supplemental Information": {
+          "Marketing Status": "Launched",
+          "Launch Date": "Q2'26",
+          "Embedded Options Available": "No"
+        },
+        "Memory Specifications": {
+          "Max Memory Size (dependent on memory type)": "96 GB",
+          "Memory Types": "Up to LPDDR5X 8533 MT/s",
+          "Max # of Memory Channels": "2"
+        },
+        "GPU Specifications": {
+          "GPU Name‡": "Intel® Arc™ B370 GPU",
+          "Graphics Max Dynamic Frequency": "2.2 GHz",
+          "GPU Peak TOPS (Int8)": "90",
+          "Graphics Output": "eDP1.5, DP 2.1 UHBR20, HDMI 2.1 FRL",
+          "Xe-cores": "10",
+          "Ray Tracing": "Yes",
+          "Max Resolution (DP)‡": "7680 x 4320 @ 60Hz",
+          "Max Resolution (eDP - Integrated Flat Panel)‡": "3840 x 2400 @ 120Hz",
+          "DirectX* Support": "DirectX 12 Ultimate",
+          "OpenGL* Support": "4.6",
+          "OpenCL* Support": "3.0",
+          "H.264 Hardware Encode/Decode": "Yes",
+          "H.265 (HEVC) Hardware Encode/Decode": "Yes",
+          "H.266 (VVC) Hardware Encode/Decode": "Decode Only",
+          "AV1 Encode/Decode": "Yes",
+          "Intel® Quick Sync Video": "Yes",
+          "# of Displays Supported ‡": "2",
+          "Device ID": "0xB081, 0xB083",
+          "Intel® Deep Learning Boost (Intel® DL Boost) on GPU": "Yes",
+          "AI Software Frameworks Supported by GPU": "OpenVINO™, WindowsML, DirectML, ONNX RT, WebGPU, WebNN",
+          "GPU Lithography": "TSMC N3E"
+        },
+        "IPU Specifications": {
+          "Intel® Image Processing Unit Version": "7.5",
+          "Mobile Industry Processor Interface (MIPI)": "CPhy & DPhy",
+          "# of MIPI Lanes & Ports": "6 Lanes & 3 Ports",
+          "Max Resolution (IPU)": "16MP"
+        },
+        "NPU Specifications": {
+          "NPU Peak TOPS (Int8)": "46",
+          "Sparsity Support": "Yes",
+          "Windows Studio Effects Support": "Yes",
+          "AI Software Frameworks Supported by NPU": "OpenVINO™, WindowsML, WebNN, ONNX RT"
+        },
+        "Expansion Options": {
+          "Intel® Thunderbolt™ 4": "Yes",
+          "PCI Express Revision": "5.0 and 4.0",
+          "PCI Express Configurations ‡": "x4 PCIe5 (1x4,2x2),x4 PCIe4 (1x4, 2x2, 4x1)x4 PCIe4 (1x4, 2x2, 4x1)",
+          "Max # of PCI Express Lanes": "12"
+        },
+        "Package Specifications": {
+          "Sockets Supported": "FCBGA2540",
+          "Max Operating Temperature": "100 °C",
+          "Package Size": "50mm x 25mm"
+        },
+        "Advanced Technologies": {
+          "Intel® Thread Director": "Yes",
+          "Intel® Smart Sound Technology": "Yes",
+          "Intel® Wake on Voice": "Yes",
+          "Intel® High Definition Audio": "Yes",
+          "Intel® Adaptix™ Technology": "Yes",
+          "Intel® Speed Shift Technology": "Yes",
+          "Intel® Turbo Boost Max Technology 3.0 ‡": "Yes",
+          "Intel® Turbo Boost Technology ‡": "2.0",
+          "Intel® 64 ‡": "Yes",
+          "Instruction Set": "64-bit",
+          "Instruction Set Extensions": "Intel® SSE4.1, Intel® SSE4.2, Intel® AVX2",
+          "Enhanced Intel SpeedStep® Technology": "Yes",
+          "Thermal Monitoring Technologies": "Yes",
+          "Intel® Volume Management Device (VMD)": "Yes"
+        },
+        "Security & Reliability": {
+          "Intel® Threat Detection Technology (TDT)": "Yes",
+          "Intel® Active Management Technology (AMT) ‡": "No",
+          "Intel® Standard Manageability (ISM) ‡": "Yes",
+          "Intel® Remote Platform Erase (RPE) ‡": "No",
+          "Intel® One-Click Recovery ‡": "No",
+          "Intel® Secure Key": "Yes",
+          "Intel® Control-Flow Enforcement Technology": "Yes",
+          "Intel® Total Memory Encryption - Multi Key": "No",
+          "Intel® AES New Instructions": "Yes",
+          "Intel® Trusted Execution Technology ‡": "Yes",
+          "Execute Disable Bit ‡": "Yes",
+          "Intel® OS Guard": "Yes",
+          "Intel® Boot Guard": "Yes",
+          "Mode-based Execute Control (MBEC)": "Yes",
+          "Intel® Stable IT Platform Program (SIPP)": "No",
+          "Intel® Virtualization Technology with Redirect Protection (VT-rp) ‡": "No",
           "Intel® Virtualization Technology (VT-x) ‡": "Yes",
           "Intel® Virtualization Technology for Directed I/O (VT-d) ‡": "Yes",
           "Intel® VT-x with Extended Page Tables (EPT) ‡": "Yes"
@@ -207989,5 +208247,5 @@
     }
   ],
   "partial": true,
-  "lastCheckedAt": "2026-05-23T14:43:49.610Z"
+  "lastCheckedAt": "2026-05-30T16:24:02.397Z"
 }
